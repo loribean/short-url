@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('short_url', function (Blueprint $table) {
+        Schema::create('short_urls', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->string('slug')->unique();
+            $table->string('destination_url');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('short_url');
+        Schema::dropIfExists('short_urls');
     }
 };
