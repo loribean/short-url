@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ShortUrl\ShortUrlController;
+use App\Http\Controllers\ShortUrl\ShortUrlDestinationController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,5 +29,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/short_url', [ShortUrlController::class, 'create'])->middleware(['auth', 'verified']);
+Route::post('/short_urls', [ShortUrlController::class, 'store'])->middleware(['auth', 'verified'])->name('short_url.store');
+
+Route::get('/go/{slug}', [ShortUrlDestinationController::class, 'index']);
 
 require __DIR__.'/auth.php';
