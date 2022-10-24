@@ -43,7 +43,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function short_urls(): HasMany
+    public function shortUrls(): HasMany
     {
         return $this->hasMany(ShortUrl::class, 'user_id', 'id');
     }

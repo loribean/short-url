@@ -31,6 +31,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/short_url', [ShortUrlController::class, 'create'])->middleware(['auth', 'verified']);
+Route::get('/short_urls', [ShortUrlController::class, 'index'])->middleware(['auth', 'verified']);
 Route::post('/short_urls', [ShortUrlController::class, 'store'])->middleware(['auth', 'verified'])->name('short_url.store');
 
 Route::get('/go/{slug}', [ShortUrlDestinationController::class, 'index']);
